@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block navActivo %}
+    <a class="nav-item nav-link" href="{{ path('home') }}">Home</a>
+    <a class="nav-item nav-link   active" href="{{ path('clientes_listar') }}">Clientes</a>
+    <a class="nav-item nav-link" href="{{ path('productos_listar') }}">Productos / Servicios</a>
+    <a class="nav-item nav-link" href="{{ path('app_logout') }}">Salir</a>
+{% endblock %} 
+
+{% block body %}
+<div class="card bg-light mb-12">
+        
+    <div class="card-body">
+    
+        <h2>Nuevo Cliente:</h2>
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}     
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    {{ form_label(form.apellido) }}
+                    {{ form_widget(form.apellido, {'attr': {'class': form_errors(form.apellido) ? 'form-control is-invalid' : 'form-control'}}) }}
+{#                    <div class="invalid-feedback">
+                        {{ form_errors(form.apellido) }}
+                    </div>#}
+                </div>
+                <div class="form-group col-md-3">
+                    {{ form_label(form.nombre) }}
+                    {{ form_widget(form.nombre, {'attr': {'class': form_errors(form.nombre) ? 'form-control is-invalid' : 'form-control'}}) }}
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    {{ form_label(form.direccion) }}
+                    {{ form_widget(form.direccion, {'attr': {'class': form_errors(form.direccion) ? 'form-control is-invalid' : 'form-control'}}) }}
+                </div>
+                <div class="form-group col-md-3">
+                    {{ form_label(form.telefono) }}
+                    {{ form_widget(form.telefono, {'attr': {'class': form_errors(form.telefono) ? 'form-control is-invalid' : 'form-control'}}) }}
+                </div> 
+            </div>
+            
+            <div>&nbsp;</div>
+            <div class="form-row">
+                <div>
+                    {#{{ form_widget(form.save) }}#}
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href = '{{ path('clientes_listar') }}'">Volver</button>
+                </div>
+                <div>&nbsp;</div>{# Espacio en blanco p/separar botones #}
+                <div>
+                    <button type="submit" class="btn btn-primary" formnovalidate>Guardar</button>
+                </div>
+            </div>
+           {{form_end(form)}}     
+        </div>
+    </div>
+{% endblock %}

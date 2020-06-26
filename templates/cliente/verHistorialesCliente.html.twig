@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block navActivo %}
+    <a class="nav-item nav-link" href="{{ path('home') }}">Home</a>
+    <a class="nav-item nav-link   active" href="{{ path('clientes_listar') }}">Clientes</a>
+    <a class="nav-item nav-link" href="{{ path('productos_listar') }}">Productos / Servicios</a>
+    <a class="nav-item nav-link" href="{{ path('app_logout') }}">Salir</a>
+{% endblock %} 
+
+{% block body %}
+<div class="card bg-light mb-12">
+        
+    <div class="card-body">
+    
+        <h2>Historiales:</h2>
+                 
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <h4>Cliente:  </h4> 
+                    {{ Cliente }}
+                </div>
+            </div>
+            {% set noEliminado = false %}    
+            {% for historial in Cliente.historiales|sort((a, b) => b.fecha <=> a.fecha) %}
+                {% if historial.eliminado == false %}
+                    {% set noEliminado = true %} 
+                    <hr/>
+                <div class="form-group col-md-3">
+                    <h4>Fecha:  </h4>
+                    {{ historial.fecha.format('d/m/Y') }}
+    {#                   {{object.date_attribute.format('d/m/Y')}}#}
+                </div>
+
+                <table class="table table-striped">
+
+                    <thead class="thead-dark">
+
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Detalle</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio Unitario</th>
+                            <th scope="col">Precio</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% set total = 0 %}
+                        {% for renglon in historial.renglonHistorial %}
+                            <tr>
+                                <th scope="row">{{ renglon.Producto }}</th>
+                                <td>{{ renglon.detalle }}</td>
+                                <td>{{ renglon.cantidad }}</td>
+                                <td>{{ renglon.precio }}</td>
+                                <td>{{ renglon.precio * renglon.cantidad}}</td>
+                            </tr>
+                            
+                            {% set total = total + (renglon.precio * renglon.cantidad) %}
+
+                        {% else %}
+                            <tr>
+                                <th scope="row" colspan="5">No se encontraron resultados.</th>   
+                            </tr>
+                        {% endfor %}
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <th style="text-align:center">Total</th>
+                            <th>
+                                {#<input type="number" id="precio_total" name="Precio Total" class="form-control" value="{{ total }}" disabled> #}
+                                {{ total }}
+                            </th>
+                        </tr>                  
+                    </tbody>
+                </table>
+                            
+
+                <div class="form-row">
+                    <div>&nbsp;&nbsp;</div>
+                    <button type="button" class="btn btn-dark" {#onclick="window.location.href = '{{ path('historiales_listar') }}'"#}>Facturar</button>
+                    <div>&nbsp;</div>
+                    <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('renglonHistorial_nuevo', {'historial_id' : historial.id }) }}'">Modificar</button>
+                    <div>&nbsp;</div>
+                    <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('historial_preeliminar', {'id' : historial.id }) }}'">Eliminar</button>
+                </div>
+                <div>&nbsp;</div>
+                {% endif %}
+            {% endfor %}
+            
+            {% if noEliminado == false %}
+                <h3>No se encontraron resultados.</h3>
+            {% endif %}
+            
+            <div>&nbsp;</div>
+            <div class="form-row">
+                <button type="button" class="btn btn-secondary" onclick="window.location.href = '{{ path('clientes_listar') }}'">Volver</button>
+                <div>&nbsp;</div>  
+            </div>
+        </div>
+    </div>
+                
+{% endblock %}
+
+

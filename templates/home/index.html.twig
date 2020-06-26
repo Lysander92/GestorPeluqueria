@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block navActivo %}
+    <a class="nav-item nav-link active" href="{{ path('home') }}">Home</a>
+    <a class="nav-item nav-link" href="{{ path('clientes_listar') }}">Clientes</a>
+    <a class="nav-item nav-link" href="{{ path('productos_listar') }}">Productos / Servicios</a>
+    <a class="nav-item nav-link" href="{{ path('app_logout') }}">Salir</a>
+{% endblock %} 
+
+{% block body %}   
+  
+ <main role="main" class="container">
+     
+    <div class="row">
+            <div class="col-lg-12">
+                
+            <style>
+               .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+               .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+           </style>
+
+           <div class="example-wrapper">
+               <h1>Hola! ✅</h1>
+                {% if app.user %}
+                    <div class="mb-3">
+                        Ingresaste como {{ app.user.username }}, <a href="{{ path('app_logout') }}">Salir</a>
+                    </div>
+                {% endif %}
+           </div>
+              
+        </div>
+    </div>
+ </main>
+{% endblock %}
+

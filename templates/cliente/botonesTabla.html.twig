@@ -1,0 +1,6 @@
+{# Botones para la columna opciones de la tabla #}
+{% block botones %}
+    <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('cliente_historiales', {'id' : row.id }) }}'">Ver Historiales</button>
+    <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('cliente_modificar', {'id' : row.id }) }}'">Modificar</button>
+    <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('cliente_preeliminar', {'id' : row.id }) }}'">Eliminar</button>
+{% endblock %}   
