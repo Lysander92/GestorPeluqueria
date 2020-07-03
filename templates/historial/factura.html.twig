@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Factura</title>
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        
+        <style>
+        /* Create two equal columns that floats next to each other */
+        .column {
+          float: left;
+          width: 50%;
+          padding: 10px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+        </style>
+    </head>
+    
+    <body>
+        <div class="card bg-light mb-12">
+            <div class="card-body">
+
+                <h2>Factura</h2>
+
+                    <div class="row">
+                        <div class="column">
+                            <h4>Cliente:  </h4>
+                            {{ historial.Cliente }}
+                        </div>
+                        <div class="column">
+                            <h4>Fecha:  </h4>
+                            {{ historial.fecha.format('d/m/Y') }}
+        {#                   {{object.date_attribute.format('d/m/Y')}}#}
+                        </div>
+                    </div>
+                        
+            <table class="table table-striped">
+
+                    <thead class="thead-dark">
+
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Detalle</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio Unitario</th>
+                            <th scope="col">Precio</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% set total = 0 %}
+                        {% for renglon in historial.renglonHistorial %}
+                            <tr>
+                                <th scope="row">{{ renglon.Producto }}</th>
+                                <td>{{ renglon.detalle }}</td>
+                                <td>{{ renglon.cantidad }}</td>
+                                <td>{{ renglon.precio }}</td>
+                                <td>{{ renglon.precio * renglon.cantidad}}</td>
+                            </tr>
+                            
+                            {% set total = total + (renglon.precio * renglon.cantidad) %}
+
+                        {% else %}
+                            <tr>
+                                <th scope="row" colspan="5">No se encontraron resultados.</th>   
+                            </tr>
+                        {% endfor %}
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <th style="text-align:center">Total</th>
+                            <th>
+                                {#<input type="number" id="precio_total" name="Precio Total" class="form-control" value="{{ total }}" disabled> #}
+                                {{ total }}
+                            </th>
+                        </tr>                  
+                    </tbody>
+                </table>
+            </div>
+        </div>
+                            
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+                            
+    </body>
+</html>
+

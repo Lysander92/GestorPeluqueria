@@ -79,7 +79,7 @@
 
                 <div class="form-row">
                     <div>&nbsp;&nbsp;</div>
-                    <button type="button" class="btn btn-dark" {#onclick="window.location.href = '{{ path('historiales_listar') }}'"#}>Facturar</button>
+                    <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('historial_facturar', {'id' : historial.id })  }}'">Facturar</button>
                     <div>&nbsp;</div>
                     <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('renglonHistorial_nuevo', {'historial_id' : historial.id }) }}'">Modificar</button>
                     <div>&nbsp;</div>

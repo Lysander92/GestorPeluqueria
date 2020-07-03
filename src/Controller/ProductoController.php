@@ -54,8 +54,8 @@ class ProductoController extends AbstractController
         
         $table = $dataTableFactory->create()
             ->add('id', TextColumn::class, ['visible' => false])
-            ->add('marca', TextColumn::class, ['label' => 'Marca'])
             ->add('nombre', TextColumn::class, ['label' => 'Nombre'])
+            ->add('marca', TextColumn::class, ['label' => 'Marca'])
             ->add('descripcion', TextColumn::class, ['label' => 'Descripción'])
             ->add('cantidad', TextColumn::class, ['label' => 'Cantidad'])
             ->add('precio', TextColumn::class, ['label' => 'Precio'])
