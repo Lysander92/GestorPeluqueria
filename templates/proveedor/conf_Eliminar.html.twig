@@ -2,14 +2,14 @@
 
 {% block navActivo %}
     <a class="nav-item nav-link" href="{{ path('home') }}">Home</a>
-    <a class="nav-item nav-link   active" href="{{ path('clientes_listar') }}">Clientes</a>
-    <a class="nav-item nav-link" href="{{ path('proveedor_listar') }}">Proveedores</a>
+    <a class="nav-item nav-link" href="{{ path('clientes_listar') }}">Clientes</a>
+    <a class="nav-item nav-link   active" href="{{ path('proveedor_listar') }}">Proveedores</a>
     <a class="nav-item nav-link" href="{{ path('productos_listar') }}">Productos / Servicios</a>
     <a class="nav-item nav-link" href="{{ path('app_logout') }}">Salir</a>
 {% endblock %} 
    
 {% block body %}   
-   <!-- Confirmacion de elinacion -->
+   <!-- Confirmacion de eliminacion -->
     <div class="card bg-light mb-12">   
         <div class="card-body">
             <div class="form-row">
@@ -19,18 +19,18 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
-                <h5>¿Está seguro que desea eliminar éste cliente? {{ cliente.id }}</h5>
+                <h5>¿Está seguro que desea eliminar éste Proveedor? {{ proveedor.id }}</h5>
                 </div>
             </div>
             <div class="form-row">
                 {#<div class="form-group col-md-12">#}
-                <p>&nbsp;&nbsp;&nbsp;{{ cliente.apellido }}, {{ cliente.nombre }} </p>       
+                <p>&nbsp;&nbsp;&nbsp;{{ proveedor.nombre }} </p>       
             </div>
             <div>&nbsp;</div>
             <div class="form-row"> 
-                <button type="button" class="btn btn-secondary" onclick="window.location.href = '{{ path('clientes_listar') }}'">Volver</button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href = '{{ path('proveedor_listar') }}'">Volver</button>
                 <div>&nbsp;</div>
-                <button type="button" class="btn btn-primary" onclick="window.location.href = '{{ path('cliente_eliminar', {'id' : cliente.id }) }}'">Eliminar</button>
+                <button type="button" class="btn btn-primary" onclick="window.location.href = '{{ path('proveedor_eliminar', {'id' : proveedor.id }) }}'">Eliminar</button>
             </div>
         </div>
     </div>

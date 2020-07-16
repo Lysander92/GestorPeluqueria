@@ -2,16 +2,16 @@
    
 {% block navActivo %}
     <a class="nav-item nav-link" href="{{ path('home') }}">Home</a>
-    <a class="nav-item nav-link   active" href="{{ path('clientes_listar') }}">Clientes</a>
-    <a class="nav-item nav-link" href="{{ path('proveedor_listar') }}">Proveedores</a>
+    <a class="nav-item nav-link" href="{{ path('clientes_listar') }}">Clientes</a>
+    <a class="nav-item nav-link   active" href="{{ path('proveedor_listar') }}">Proveedores</a>
     <a class="nav-item nav-link" href="{{ path('productos_listar') }}">Productos / Servicios</a>
     <a class="nav-item nav-link" href="{{ path('app_logout') }}">Salir</a>
 {% endblock %} 
 
 {% block titleLista %}  
-    <h1 class="h3 mb-3 font-weight-normal">Listado de Clientes:</h1>
-    <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('cliente_nuevo') }}'">Nuevo Cliente</button>
-    <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('historial_nuevo') }}'">Nuevo Historial</button>
+    <h1 class="h3 mb-3 font-weight-normal">Listado de Proveedores:</h1>
+    <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('proveedor_nuevo') }}'">Nuevo Proveedor</button>
+    <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('historial_nuevo_proveedor') }}'">Nuevo Historial</button>
 {% endblock %}
 
 {#

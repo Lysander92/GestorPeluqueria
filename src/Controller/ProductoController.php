@@ -53,12 +53,12 @@ class ProductoController extends AbstractController
         //$builder = $entityManager->createQueryBuilder();
         
         $table = $dataTableFactory->create()
-            ->add('id', TextColumn::class, ['visible' => false])
+            ->add('id', TextColumn::class, ['visible' => false, 'searchable'  => false])
             ->add('nombre', TextColumn::class, ['label' => 'Nombre'])
             ->add('marca', TextColumn::class, ['label' => 'Marca'])
             ->add('descripcion', TextColumn::class, ['label' => 'Descripción'])
-            ->add('cantidad', TextColumn::class, ['label' => 'Cantidad'])
-            ->add('precio', TextColumn::class, ['label' => 'Precio'])
+            ->add('cantidad', TextColumn::class, ['label' => 'Cantidad', 'searchable'  => false])
+            ->add('precio', TextColumn::class, ['label' => 'Precio', 'searchable'  => false])
             ->add('buttons', TwigColumn::class, [
                 'label' => 'Opciones',
                 'className' => 'buttons',

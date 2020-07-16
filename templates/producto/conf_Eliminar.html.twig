@@ -3,6 +3,7 @@
 {% block navActivo %}
     <a class="nav-item nav-link" href="{{ path('home') }}">Home</a>
     <a class="nav-item nav-link" href="{{ path('clientes_listar') }}">Clientes</a>
+    <a class="nav-item nav-link" href="{{ path('proveedor_listar') }}">Proveedores</a>
     <a class="nav-item nav-link  active" href="{{ path('productos_listar') }}">Productos / Servicios</a>
     <a class="nav-item nav-link" href="{{ path('app_logout') }}">Salir</a>
 {% endblock %}    
@@ -18,17 +19,26 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
-                <h5>¿Está seguro que desea eliminar éste producto? {{ producto.id }}</h5>
+                <h5>¿Está seguro que desea eliminar éste producto?</h5>
                 </div>
             </div>
-            <div class="form-row">
-                {#<div class="form-group col-md-12">#}
-                <p><b>Marca:</b> {{ producto.marca }} </p>
-                <div>&nbsp;&nbsp;&nbsp;</div>
+            
+            <div class="form-row">               
                 <p><b>Nombre:</b> {{ producto.nombre }} </p>
-                
+                <div>&nbsp;&nbsp;&nbsp;</div>
+                {% if producto.marca %}
+                <p><b>Marca:</b> {{ producto.marca }} </p>
+                {% endif %}
             </div>
+            
+            {% if producto.descripcion %}
+            <div class="form-row">
+                <p><b>Descripción:</b> {{ producto.descripcion }} </p>
+            </div>
+            {% endif %}
             <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            
             <div class="form-row"> 
                 <button type="button" class="btn btn-secondary" onclick="window.location.href = '{{ path('productos_listar') }}'">Volver</button>
                 <div>&nbsp;</div>

@@ -56,9 +56,9 @@ class RenglonHistorialType extends AbstractType
                             ->where('p.eliminado = false')
                             ->orderBy('p.nombre', 'ASC');
                     },
-            'choice_label' => function ($producto) {
-                      return $producto->getNombre();
-                },
+//            'choice_label' => function ($producto) {
+//                      return $producto->getNombre();
+//                },
         ));
 
         if($producto)
@@ -78,7 +78,7 @@ class RenglonHistorialType extends AbstractType
         $data = $event->getData();
         
         
-        // Search for selected City and convert it into an Entity
+         //Search for selected City and convert it into an Entity
         $producto = $this->em->getRepository(Producto::class)->find($data['Producto']);
         $this->addElements($form, $producto);
      }

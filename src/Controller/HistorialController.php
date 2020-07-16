@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Historial;
 use App\Entity\Cliente;
 use App\Form\HistorialType;
+use App\Form\HistorialProType;
 use Symfony\Component\HttpFoundation\Request;
 use Omines\DataTablesBundle\Column\TextColumn;
 use Omines\DataTablesBundle\Column\DateTimeColumn;
@@ -51,12 +52,42 @@ class HistorialController extends AbstractController
     }
     
     /**
+     * @Route("/historial/nuevoProveedor/", name="historial_nuevo_proveedor")
+     */
+    public function historialProNuevoAction(Request $request)
+    {
+        $historial = new Historial();
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(HistorialProType::class, $historial);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $historial = $form->getData();
+            $historial->setEliminado(false);
+            $entityManager->persist($historial);
+            $entityManager->flush();
+            
+            //return $this->redirectToRoute('historiales_listar');
+             return $this->redirectToRoute('renglonHistorial_nuevo', array('historial_id' => $historial->getId()));
+
+        }
+        return $this->render('historial/nuevoProveedor.html.twig',[
+            'form' => $form->createView(),
+        ]);
+    }
+    
+    //DEPRECADO
+    /**
      * @Route("/historial/listado/", name="historiales_listar")
      */
     public function showAction(Request $request, DataTableFactory $dataTableFactory)
     { 
         $table = $dataTableFactory->create()
-            ->add('id', TextColumn::class, ['visible' => false])
+            ->add('id', TextColumn::class, ['visible' => false, 'searchable'  => false])
             ->add('Cliente', TextColumn::class, ['label' => 'Facturado', 'field' => 'Cliente.apellido']) 
             ->add('fecha', DateTimeColumn::class, [
                 'label' => 'Fecha',
@@ -117,9 +148,15 @@ class HistorialController extends AbstractController
         $entityManager->flush();
 
 //        return $this->redirectToRoute('historiales_listar');
+        if($historial->getProveedor() == null){
         return $this->render('cliente/verHistorialesCliente.html.twig',[
             'Cliente' => $historial->getCliente(),
         ]);
+        }else{
+            return $this->render('proveedor/verHistorialesProveedor.html.twig',[
+            'Proveedor' => $historial->getProveedor(),
+            ]);
+        }
     }
     
     //DEPRECADO

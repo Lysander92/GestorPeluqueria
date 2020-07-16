@@ -9,8 +9,8 @@
 
 {% block navActivo %}
     <a class="nav-item nav-link" href="{{ path('home') }}">Home</a>
-    <a class="nav-item nav-link   active" href="{{ path('clientes_listar') }}">Clientes</a>
-    <a class="nav-item nav-link" href="{{ path('proveedor_listar') }}">Proveedores</a>
+    <a class="nav-item nav-link" href="{{ path('clientes_listar') }}">Clientes</a>
+    <a class="nav-item nav-link   active" href="{{ path('proveedor_listar') }}">Proveedores</a>
     <a class="nav-item nav-link" href="{{ path('productos_listar') }}">Productos / Servicios</a>
     <a class="nav-item nav-link" href="{{ path('app_logout') }}">Salir</a>
 {% endblock %} 
@@ -24,9 +24,9 @@
             {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}     
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    {{ form_label(form.Cliente) }}
+                    {{ form_label(form.Proveedor) }}
                     
-                    {{ form_widget(form.Cliente, {'attr': {'class': 'selectpicker','data-style': 'btn-light', 'data-live-search': 'true'}}) }}
+                    {{ form_widget(form.Proveedor, {'attr': {'class': 'selectpicker','data-style': 'btn-light', 'data-live-search': 'true'}}) }}
                     {#{{ form_widget(form.Cliente, {'attr': {'class': form_errors(form.Cliente) ? 'form-control is-invalid' : 'form-control'}}) }}#}
 {#                    <div class="invalid-feedback">
                         {{ form_errors(form.Cliente) }}
@@ -44,7 +44,7 @@
                 
                 <div>
                     {#{{ form_widget(form.save) }}#}
-                    <button type="button" class="btn btn-secondary" onclick="window.location.href = '{{ path('clientes_listar') }}'">Volver</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href = '{{ path('proveedor_listar') }}'">Volver</button>
                 </div>
                 <div>&nbsp;</div>{# Espacio en blanco p/separar botones #}
                 <div>

@@ -2,7 +2,13 @@
 
 {% block navActivo %}
     <a class="nav-item nav-link" href="{{ path('home') }}">Home</a>
-    <a class="nav-item nav-link   active" href="{{ path('clientes_listar') }}">Clientes</a>
+    {% if historial.proveedor == null %}
+        <a class="nav-item nav-link active" href="{{ path('clientes_listar') }}">Clientes</a>
+        <a class="nav-item nav-link" href="{{ path('proveedor_listar') }}">Proveedores</a> 
+    {% else %}
+        <a class="nav-item nav-link" href="{{ path('clientes_listar') }}">Clientes</a>
+        <a class="nav-item nav-link active" href="{{ path('proveedor_listar') }}">Proveedores</a> 
+    {% endif %}
     <a class="nav-item nav-link" href="{{ path('productos_listar') }}">Productos / Servicios</a>
     <a class="nav-item nav-link" href="{{ path('app_logout') }}">Salir</a>
 {% endblock %} 
@@ -23,15 +29,25 @@
             </div>
             <div class="form-row">
                 {#<div class="form-group col-md-12">#}
+                {% if historial.proveedor == null %}
                 <p><b>Cliente:</b> {{ historial.cliente.apellido }}, {{ historial.cliente.nombre }} </p>
+                {% else %}
+                <p><b>Proveedor:</b> {{ historial.proveedor.nombre }} </p>
+                {% endif %}
                 <div>&nbsp;&nbsp;&nbsp;</div>
                 <p><b>Fecha:</b> {{ historial.fecha|date('Y-m-d') }} </p>
                 
             </div>
-            <div class="form-row"> 
+            <div class="form-row">
+                {% if historial.proveedor == null %}
                 <button type="button" class="btn btn-secondary" onclick="window.location.href = '{{ path('cliente_historiales', {'id' : historial.cliente.id }) }}'">Volver</button>
+                {% else %}
+                <button type="button" class="btn btn-secondary" onclick="window.location.href = '{{ path('proveedor_historiales', {'id' : historial.proveedor.id }) }}'">Volver</button>
+                {% endif %}
                 <div>&nbsp;</div>
                 <button type="button" class="btn btn-primary" onclick="window.location.href = '{{ path('historial_eliminar', {'id' : historial.id }) }}'">Eliminar</button>
+                
+                
             </div>
         </div>
     </div>

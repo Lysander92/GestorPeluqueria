@@ -158,7 +158,12 @@ class Producto
     }
     
     public function __toString() {
-        return $this->nombre;
+    if ($this->marca == null){
+            return $this->nombre;
+        }
+        else{
+            return "$this->nombre, $this->marca";
+        }
     }
 
     public function getEliminado(): ?bool

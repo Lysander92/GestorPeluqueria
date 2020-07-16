@@ -35,7 +35,6 @@ class Historial
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Cliente", inversedBy="historiales")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $Cliente;
 
@@ -43,6 +42,11 @@ class Historial
      * @ORM\Column(type="boolean", options={"default":false})
      */
     private $eliminado;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Proveedor::class, inversedBy="historiales")
+     */
+    private $proveedor;
 
     public function __construct()
     {
@@ -129,6 +133,18 @@ class Historial
     public function setEliminado(bool $eliminado): self
     {
         $this->eliminado = $eliminado;
+
+        return $this;
+    }
+
+    public function getProveedor(): ?Proveedor
+    {
+        return $this->proveedor;
+    }
+
+    public function setProveedor(?Proveedor $proveedor): self
+    {
+        $this->proveedor = $proveedor;
 
         return $this;
     }

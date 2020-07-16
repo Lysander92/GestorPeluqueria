@@ -2,8 +2,8 @@
 
 {% block navActivo %}
     <a class="nav-item nav-link" href="{{ path('home') }}">Home</a>
-    <a class="nav-item nav-link   active" href="{{ path('clientes_listar') }}">Clientes</a>
-    <a class="nav-item nav-link" href="{{ path('proveedor_listar') }}">Proveedores</a>
+    <a class="nav-item nav-link" href="{{ path('clientes_listar') }}">Clientes</a>
+    <a class="nav-item nav-link   active" href="{{ path('proveedor_listar') }}">Proveedores</a>
     <a class="nav-item nav-link" href="{{ path('productos_listar') }}">Productos / Servicios</a>
     <a class="nav-item nav-link" href="{{ path('app_logout') }}">Salir</a>
 {% endblock %} 
@@ -17,12 +17,12 @@
                  
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    <h4>Cliente:  </h4> 
-                    {{ Cliente }}
+                    <h4>Proveedor:  </h4> 
+                    {{ Proveedor }}
                 </div>
             </div>
             {% set noEliminado = false %}    
-            {% for historial in Cliente.historiales|sort((a, b) => b.fecha <=> a.fecha) %}
+            {% for historial in Proveedor.historiales|sort((a, b) => b.fecha <=> a.fecha) %}
                 {% if historial.eliminado == false %}
                     {% set noEliminado = true %} 
                     <hr/>
@@ -96,7 +96,7 @@
             
             <div>&nbsp;</div>
             <div class="form-row">
-                <button type="button" class="btn btn-secondary" onclick="window.location.href = '{{ path('clientes_listar') }}'">Volver</button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href = '{{ path('proveedor_listar') }}'">Volver</button>
                 <div>&nbsp;</div>  
             </div>
         </div>

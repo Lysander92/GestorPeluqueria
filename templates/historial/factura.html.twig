@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Factura</title>
+        <title>Historial</title>
         
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
         
@@ -27,12 +27,17 @@
         <div class="card bg-light mb-12">
             <div class="card-body">
 
-                <h2>Factura</h2>
+                <h2>Recibo</h2>
 
                     <div class="row">
                         <div class="column">
+                            {% if historial.Proveedor == null %}
                             <h4>Cliente:  </h4>
                             {{ historial.Cliente }}
+                            {% else %}
+                            <h4>Proveedor:  </h4>
+                            {{ historial.Proveedor }}
+                            {% endif %}
                         </div>
                         <div class="column">
                             <h4>Fecha:  </h4>
