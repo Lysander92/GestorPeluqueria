@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Historial;
 use App\Entity\Cliente;
+use App\Entity\Proveedor;
 use App\Form\HistorialType;
 use App\Form\HistorialProType;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,13 +24,20 @@ use Dompdf\Options;
 class HistorialController extends AbstractController
 {
     /**
-     * @Route("/historial/nuevo/", name="historial_nuevo")
+     * @Route("/historial/nuevo/{id}", name="historial_nuevo")
      */
-    public function historialNuevoAction(Request $request)
+    public function historialNuevoAction(Request $request, $id)
     {
         $historial = new Historial();
-
+        
         $entityManager = $this->getDoctrine()->getManager();
+        
+        if($id != 0){
+            $cliente = $entityManager
+            ->getRepository(Cliente::class)
+            ->find($id);
+            $historial->setCliente($cliente);
+        }
 
         $form = $this->createForm(HistorialType::class, $historial);
 
@@ -52,13 +60,20 @@ class HistorialController extends AbstractController
     }
     
     /**
-     * @Route("/historial/nuevoProveedor/", name="historial_nuevo_proveedor")
+     * @Route("/historial/nuevoProveedor/{id}", name="historial_nuevo_proveedor")
      */
-    public function historialProNuevoAction(Request $request)
+    public function historialProNuevoAction(Request $request, $id)
     {
         $historial = new Historial();
 
         $entityManager = $this->getDoctrine()->getManager();
+        
+        if($id != 0){
+            $proveedor = $entityManager
+            ->getRepository(Proveedor::class)
+            ->find($id);
+            $historial->setProveedor($proveedor);
+        }
 
         $form = $this->createForm(HistorialProType::class, $historial);
 

@@ -44,6 +44,11 @@ class Proveedor
      */
     private $eliminado;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Usuario::class, inversedBy="Proveedores")
+     */
+    private $usuario;
+
     public function __construct()
     {
         $this->historiales = new ArrayCollection();
@@ -135,5 +140,17 @@ class Proveedor
     
     public function __toString() {
         return $this->nombre;
+    }
+
+    public function getUsuario(): ?Usuario
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?Usuario $usuario): self
+    {
+        $this->usuario = $usuario;
+
+        return $this;
     }
 }

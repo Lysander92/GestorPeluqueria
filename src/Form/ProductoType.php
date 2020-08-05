@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ProductoType extends AbstractType
 {
@@ -21,6 +21,10 @@ class ProductoType extends AbstractType
             ->add('descripcion', TextareaType::class, ['label' => 'Descripción'])
             ->add('cantidad', NumberType::class)
             ->add('precio', NumberType::class, ['empty_data' => '0'])
+            ->add('controlStock', CheckboxType::class, [
+                'label'    => '¿Controlar stock?',
+                'required' => false,
+            ])
         ;
     }
 

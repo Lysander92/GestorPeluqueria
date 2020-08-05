@@ -56,6 +56,16 @@ class Producto
      */
     private $eliminado;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $controlStock;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Usuario::class, inversedBy="Productos")
+     */
+    private $usuario;
+
     public function __construct()
     {
         $this->renglonHistoriales = new ArrayCollection();
@@ -174,6 +184,30 @@ class Producto
     public function setEliminado(bool $eliminado): self
     {
         $this->eliminado = $eliminado;
+
+        return $this;
+    }
+
+    public function getControlStock(): ?bool
+    {
+        return $this->controlStock;
+    }
+
+    public function setControlStock(bool $controlStock): self
+    {
+        $this->controlStock = $controlStock;
+
+        return $this;
+    }
+
+    public function getUsuario(): ?Usuario
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?Usuario $usuario): self
+    {
+        $this->usuario = $usuario;
 
         return $this;
     }

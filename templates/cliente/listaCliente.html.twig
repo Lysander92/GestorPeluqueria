@@ -11,7 +11,7 @@
 {% block titleLista %}  
     <h1 class="h3 mb-3 font-weight-normal">Listado de Clientes:</h1>
     <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('cliente_nuevo') }}'">Nuevo Cliente</button>
-    <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('historial_nuevo') }}'">Nuevo Historial</button>
+    <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('historial_nuevo', {'id' : 0 }) }}'">Nuevo Historial</button>
 {% endblock %}
 
 {#

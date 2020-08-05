@@ -21,6 +21,9 @@
                     {{ Proveedor }}
                 </div>
             </div>
+            <div class="form-row">
+                <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('historial_nuevo_proveedor', {'id' : Proveedor.id }) }}'">Nuevo Historial</button>
+            </div>
             {% set noEliminado = false %}    
             {% for historial in Proveedor.historiales|sort((a, b) => b.fecha <=> a.fecha) %}
                 {% if historial.eliminado == false %}

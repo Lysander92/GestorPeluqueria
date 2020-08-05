@@ -19,7 +19,10 @@
                 <div class="form-group col-md-3">
                     <h4>Cliente:  </h4> 
                     {{ Cliente }}
-                </div>
+                </div>              
+            </div>
+            <div class="form-row">
+                <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('historial_nuevo', {'id' : Cliente.id }) }}'">Nuevo Historial</button>
             </div>
             {% set noEliminado = false %}    
             {% for historial in Cliente.historiales|sort((a, b) => b.fecha <=> a.fecha) %}

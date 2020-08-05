@@ -48,6 +48,11 @@ class Historial
      */
     private $proveedor;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Usuario::class, inversedBy="Historiales")
+     */
+    private $usuario;
+
     public function __construct()
     {
         $this->RenglonHistorial = new ArrayCollection();
@@ -145,6 +150,18 @@ class Historial
     public function setProveedor(?Proveedor $proveedor): self
     {
         $this->proveedor = $proveedor;
+
+        return $this;
+    }
+
+    public function getUsuario(): ?Usuario
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?Usuario $usuario): self
+    {
+        $this->usuario = $usuario;
 
         return $this;
     }

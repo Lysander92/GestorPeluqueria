@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+{% endblock %}
+
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block navActivo %}
@@ -14,7 +20,7 @@
  <main role="main" class="container">
      
     <div class="row">
-            <div class="col-lg-12">
+        <div class="col-lg-12">
                 
             <style>
                .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
@@ -22,16 +28,105 @@
            </style>
 
            <div class="example-wrapper">
-               <h1>Hola! ✅</h1>
+               <h1>Bienvenido! ✅</h1>
                 {% if app.user %}
                     <div class="mb-3">
                         Ingresaste como {{ app.user.username }}, <a href="{{ path('app_logout') }}">Salir</a>
                     </div>
                 {% endif %}
-           </div>
-              
+                <div class="mb-3">
+                    <h3>Estadísticas:</h3>
+                    Fecha desde:
+                    <input id="fecha_desde" data-provide="datepicker" class="datepicker">
+                    Fecha hasta:
+                    <input id="fecha_hasta" data-provide="datepicker" class="datepicker">
+                </div>
+                <div class="mb-3">
+                    <h5>Ingresos Brutos</h5>
+                    <input id="ingresos_brutos" disabled>
+                </div>
+                <div class="mb-3">
+                    <h5>Gastos</h5>
+                    <input id="gastos" disabled>
+                </div>
+           </div>     
         </div>
     </div>
  </main>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+<script>
+    jQuery(document).ready(function() {
+    // you may need to change this code if you are not using Bootstrap Datepicker
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        language: "es-ES"
+    });
+});
+</script>
+
+<script>
+    $('#fecha_desde').change( function() { pedirDatos() });
+    $('#fecha_hasta').change( function() { pedirDatos() });
+
+    // Request the neighborhoods of the selected city.
+    function pedirDatos(){
+
+        var fechaDesdeDatepicker = $('#fecha_desde');
+        var fechaHastaDatepicker = $('#fecha_hasta');
+
+        $.ajax({
+            url: "{{ path('calcular_estadisticas') }}",
+            type: "GET",
+            dataType: "JSON",
+            data: {
+                fechaDesde: fechaDesdeDatepicker.val(),
+                fechaHasta: fechaHastaDatepicker.val(),
+            },
+            success: function (resultados) {
+
+                var ingresosBrutosField = $('#ingresos_brutos');
+                var gastosField = $('#gastos');
+                
+                if (resultados.ingresosBrutos === null){
+                    ingresosBrutosField.val('0');
+                }else{
+                    ingresosBrutosField.val(resultados.ingresosBrutos);
+                }
+                
+                if (resultados.gastos === null){
+                    gastosField.val('0');
+                }else{
+                    gastosField.val(resultados.gastos);
+                }
+                
+
+                // Remove current options
+                //$('#app_renglonHistorial_cantidad').val('0');
+                //$("#precio_total").val('0');
+                //precioUField.html('');
+
+
+                //$.each(productos, function (key, producto) {
+                //   precioField.val(producto.precio);
+                //   $('#app_renglonHistorial_detalle').val(producto.detalle); 
+                //});
+
+                //var precioNuevo = cantidadField.val() * precioField.val();
+                //$('#precio_total').val(precioNuevo);
+
+            },
+            error: function (err) {
+                alert("Error cargando datos ...");
+            }
+        });
+    }
+
+</script>
 {% endblock %}
 

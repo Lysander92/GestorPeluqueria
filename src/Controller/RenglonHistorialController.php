@@ -40,6 +40,20 @@ class RenglonHistorialController extends AbstractController
 
             $renglonHistorial = $form->getData();
             $renglonHistorial->setHistorial($historial);
+             
+            $producto = $entityManager
+                        ->getRepository(Producto::class)
+                        ->find($renglonHistorial->getProducto());
+        
+            if($producto->getControlStock()){
+                if($historial->getProveedor() != null){
+                    $cantidad = $producto->getCantidad() + $renglonHistorial->getCantidad();
+                }else{
+                    $cantidad = $producto->getCantidad() - $renglonHistorial->getCantidad();    
+                }
+                $producto->setCantidad($cantidad);
+                $entityManager->persist($producto);
+            }
             
             $entityManager->persist($renglonHistorial);
             $entityManager->flush();
@@ -65,8 +79,23 @@ class RenglonHistorialController extends AbstractController
         $renglonHistorial = $entityManager
             ->getRepository(RenglonHistorial::class)
             ->find($id);
-
+        
         $historial = $renglonHistorial->getHistorial();
+        
+        $producto = $entityManager
+                        ->getRepository(Producto::class)
+                        ->find($renglonHistorial->getProducto());
+        
+            if($producto->getControlStock()){
+                if($historial->getProveedor() != null){
+                    $cantidad = $producto->getCantidad() - $renglonHistorial->getCantidad();
+                }else{
+                    $cantidad = $producto->getCantidad() + $renglonHistorial->getCantidad();    
+                }
+                $producto->setCantidad($cantidad);
+                $entityManager->persist($producto);
+            }
+
         $historial->removeRenglonHistorial($renglonHistorial);
         //$entityManager->remove($renglonHistorial);
 

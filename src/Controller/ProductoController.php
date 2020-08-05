@@ -33,6 +33,11 @@ class ProductoController extends AbstractController
 
             $producto = $form->getData();
             $producto->setEliminado(false);
+            
+            if($producto->getControlStock() && ($producto->getCantidad() == null)){
+                $producto->setCantidad(0);
+            }
+            
             $entityManager->persist($producto);
             $entityManager->flush();
             
@@ -104,8 +109,11 @@ class ProductoController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
 
             $producto = $form->getData();
+            
+            if($producto->getControlStock() && ($producto->getCantidad() == null)){
+                $producto->setCantidad(0);
+            }
 
-//            $entityManager->persist($formulario);
             $entityManager->flush();
             
             return $this->redirectToRoute('productos_listar');

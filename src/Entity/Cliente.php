@@ -51,6 +51,11 @@ class Cliente
      */
     private $eliminado;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Usuario::class, inversedBy="Cliente")
+     */
+    private $usuario;
+
     public function __construct()
     {
         $this->historiales = new ArrayCollection();
@@ -152,6 +157,18 @@ class Cliente
     public function setEliminado(bool $eliminado): self
     {
         $this->eliminado = $eliminado;
+
+        return $this;
+    }
+
+    public function getUsuario(): ?Usuario
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?Usuario $usuario): self
+    {
+        $this->usuario = $usuario;
 
         return $this;
     }
