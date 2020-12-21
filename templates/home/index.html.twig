@@ -11,6 +11,7 @@
 {% block navActivo %}
     <a class="nav-item nav-link active" href="{{ path('home') }}">Home</a>
     <a class="nav-item nav-link" href="{{ path('clientes_listar') }}">Clientes</a>
+    <a class="nav-item nav-link" href="{{ path('proveedor_listar') }}">Proveedores</a>
     <a class="nav-item nav-link" href="{{ path('productos_listar') }}">Productos / Servicios</a>
     <a class="nav-item nav-link" href="{{ path('app_logout') }}">Salir</a>
 {% endblock %} 
@@ -44,6 +45,10 @@
                 <div class="mb-3">
                     <h5>Ingresos Brutos</h5>
                     <input id="ingresos_brutos" disabled>
+                </div>
+                <div class="mb-3">
+                    <h5>Facturado</h5>
+                    <input id="facturado" disabled>
                 </div>
                 <div class="mb-3">
                     <h5>Gastos</h5>
@@ -91,12 +96,15 @@
             success: function (resultados) {
 
                 var ingresosBrutosField = $('#ingresos_brutos');
+                var facturadoField = $('#facturado');
                 var gastosField = $('#gastos');
                 
                 if (resultados.ingresosBrutos === null){
                     ingresosBrutosField.val('0');
+                    facturadoField.val('0');
                 }else{
                     ingresosBrutosField.val(resultados.ingresosBrutos);
+                    facturadoField.val(resultados.facturado);
                 }
                 
                 if (resultados.gastos === null){

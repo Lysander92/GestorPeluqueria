@@ -26,19 +26,25 @@
     <body>
         <div class="card bg-light mb-12">
             <div class="card-body">
-
-                <h2>Recibo</h2>
+            {% if historial.Proveedor == null %}
+                <h2>Factura</h2>
 
                     <div class="row">
                         <div class="column">
-                            {% if historial.Proveedor == null %}
+                            
                             <h4>Cliente:  </h4>
                             {{ historial.Cliente }}
-                            {% else %}
+                        </div>
+                {% else %}
+                <h2>Recibo</h2>
+                    <div class="row">
+                        <div class="column">
+                            
                             <h4>Proveedor:  </h4>
                             {{ historial.Proveedor }}
-                            {% endif %}
-                        </div>
+                        </div>    
+                        {% endif %}
+                        
                         <div class="column">
                             <h4>Fecha:  </h4>
                             {{ historial.fecha.format('d/m/Y') }}

@@ -46,6 +46,7 @@ class ProductoController extends AbstractController
         }
         return $this->render('producto/nuevo.html.twig',[
             'form' => $form->createView(),
+            'producto' => $producto
         ]);
     }
     
@@ -121,6 +122,7 @@ class ProductoController extends AbstractController
         }
         return $this->render('producto/nuevo.html.twig',[
             'form' => $form->createView(),
+            'producto' => $producto
         ]);
     }
     

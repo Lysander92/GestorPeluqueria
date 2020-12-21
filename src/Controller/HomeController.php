@@ -75,6 +75,19 @@ class HomeController extends AbstractController
         
         $responseArray['gastos'] = $respuesta['gastos'];
         
+        $sql = "SELECT SUM(r.cantidad*r.precio) AS facturado "
+                . "FROM historial h, cliente c, renglon_historial r "
+                . "WHERE c.id = h.cliente_id "
+                . "AND h.id = r.historial_id "
+                . "AND h.factura = '1' "
+                . "AND h.fecha BETWEEN :fechaDesde AND :fechaHasta";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array('fechaDesde' => $fechaDesde, 'fechaHasta' => $fechaHasta ));
+        $respuesta = $stmt->fetch();
+        
+        $responseArray['facturado'] = $respuesta['facturado'];
+        //var_dump($responseArray);die;
+        
         // Return array with structure of the neighborhoods of the providen city id
         return new JsonResponse($responseArray);
 

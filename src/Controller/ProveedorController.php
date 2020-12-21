@@ -41,6 +41,7 @@ class ProveedorController extends AbstractController
         }
         return $this->render('proveedor/nuevo.html.twig',[
             'form' => $form->createView(),
+            'proveedor' => $proveedor
         ]);
     }
     
@@ -108,6 +109,7 @@ class ProveedorController extends AbstractController
         }
         return $this->render('proveedor/nuevo.html.twig',[
             'form' => $form->createView(),
+            'proveedor' => $proveedor
         ]);
     }
     
@@ -164,7 +166,7 @@ class ProveedorController extends AbstractController
             ->getRepository(Proveedor::class)
             ->find($id);
         
-        return $this->render('cliente/conf_Eliminar.html.twig', array('proveedor' => $proveedor)); 
+        return $this->render('proveedor/conf_Eliminar.html.twig', array('proveedor' => $proveedor)); 
     }
     
     /**

@@ -13,7 +13,11 @@
         
     <div class="card-body">
     
+        {% if cliente.nombre == null %}
         <h2>Nuevo Cliente:</h2>
+        {% else %}
+        <h2>Modificar Cliente:</h2>
+        {% endif %}
             {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}     
             <div class="form-row">
                 <div class="form-group col-md-3">

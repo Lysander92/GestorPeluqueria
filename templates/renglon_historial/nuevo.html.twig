@@ -7,7 +7,13 @@
 
 {% block navActivo %}
     <a class="nav-item nav-link" href="{{ path('home') }}">Home</a>
-    <a class="nav-item nav-link active" href="{{ path('clientes_listar') }}">Clientes</a>
+    {% if historial.proveedor == null %}
+        <a class="nav-item nav-link active" href="{{ path('clientes_listar') }}">Clientes</a>
+        <a class="nav-item nav-link" href="{{ path('proveedor_listar') }}">Proveedores</a>
+    {% else %}
+        <a class="nav-item nav-link" href="{{ path('clientes_listar') }}">Clientes</a>
+        <a class="nav-item nav-link active" href="{{ path('proveedor_listar') }}">Proveedores</a>    
+    {% endif %}
     <a class="nav-item nav-link" href="{{ path('productos_listar') }}">Productos / Servicios</a>
     <a class="nav-item nav-link" href="{{ path('app_logout') }}">Salir</a>
 {% endblock %}
@@ -17,7 +23,7 @@
         
     <div class="card-body">
     
-        <h2>Nuevo Historial:</h2>
+        <h2>Historial:</h2>
                  
             <div class="form-row">
                 <div class="form-group col-md-3">
@@ -122,7 +128,7 @@
                 <button type="button" class="btn btn-secondary" onclick="window.location.href = '{{ path('proveedor_historiales', {'id' : historial.proveedor.id }) }}'">Volver</button>
                 {% endif %}
                 <div>&nbsp;</div>
-                <button type="button" class="btn btn-primary" {#onclick="window.location.href = '{{ path('historiales_listar') }}'"#}>Facturar</button>
+                <button type="button" class="btn btn-dark" onclick="window.location.href = '{{ path('historial_facturar', {'id' : historial.id })  }}'">Imprimir</button>
             </div>
         </div>
     </div>

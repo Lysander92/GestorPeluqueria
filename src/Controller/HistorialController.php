@@ -230,6 +230,10 @@ class HistorialController extends AbstractController
             ->getRepository(Historial::class)
             ->find($id);
         
+        $historial->setFactura(true);
+        $entityManager->persist($historial);
+        $entityManager->flush();
+        
         // Retrieve the HTML generated in our twig file
         $html = $this->renderView('historial/factura.html.twig', [
             'historial' => $historial,
