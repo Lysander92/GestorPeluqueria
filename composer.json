@@ -6,7 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "^1.10",
-        "dompdf/dompdf": "^0.8.5",
+        "dompdf/dompdf": "^2.0.0",
         "omines/datatables-bundle": "^0.4.1",
         "symfony/asset": "4.4.*",
         "symfony/console": "4.4.*",
